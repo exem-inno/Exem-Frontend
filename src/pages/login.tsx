@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -7,11 +7,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-const LoginPage: React.FC = () => {
-  const handleSubmit = (event: React.FormEvent) => {
+const LoginPage: React.VFC = () => {
+  const handleSubmit = useCallback((event: React.FormEvent): void => {
     event.preventDefault();
     console.log("Clicked Sign In Button");
-  };
+  }, []);
 
   return (
     <Container component="main" maxWidth="xs">
