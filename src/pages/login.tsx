@@ -28,7 +28,7 @@ const LoginPage: React.VFC = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Log In
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <Button
@@ -37,7 +37,7 @@ const LoginPage: React.VFC = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In for Google
+            Log In using GOOGLE
           </Button>
         </Box>
       </Box>
