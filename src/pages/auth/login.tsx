@@ -37,7 +37,7 @@ const LoginPage: React.VFC = () => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Log In using GOOGLE
+            Log In with Google
           </Button>
         </Box>
       </Box>
