@@ -3,7 +3,7 @@ import React from "react";
 import Header from "../../components/new-chart/header";
 
 // TODO: choose a type - Page or Modal
-const NewChartPage: React.VFC = (props) => {
+const NewChartPage: React.VFC = () => {
   const onSubmit = (value: FormDataEntryValue) => {
     console.log("handleSubmit");
     console.log(value);
