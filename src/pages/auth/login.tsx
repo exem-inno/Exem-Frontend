@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 const url = "http://localhost:8080";
 const redirectionURL = "http://localhost:3000/auth/handle";
 const loginURL =
-  url + "/oauth2/authorization/google?redirect_uri=" + redirectionURL;
+  url + "/oauth2/authorize/google?redirect_uri=" + redirectionURL;
 
 const LoginPage: React.VFC = () => {
   return (
