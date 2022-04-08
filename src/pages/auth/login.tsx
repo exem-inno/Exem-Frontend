@@ -11,6 +11,18 @@ const LoginPage: React.VFC = () => {
   const handleSubmit = useCallback((event: React.FormEvent): void => {
     event.preventDefault();
     console.log("Clicked Sign In Button");
+
+    // Google Login
+    const url = "http://localhost:8080";
+    const redirectionURL = "http://localhost:3000/auth/handle";
+    fetch(url + "/oauth2/authorization/google?redirection_url=" + redirectionURL)
+    .then((res) => {
+      if (res.ok){
+        return res.json();
+      }
+    }).then((data) => {
+      console.log("login success", data);
+    });
   }, []);
 
   return (
