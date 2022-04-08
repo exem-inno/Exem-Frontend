@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-const HandlePage = () => {
+const HandlePage: React.VFC = () => {
   const location = useLocation();
   const [redirectionPage, setRedirectionPage] = useState<string>("/");
 
@@ -37,8 +37,8 @@ const HandlePage = () => {
   return (
     <Routes>
       <Route
-        path="/auth/login"
-        element={<Navigate replace to={`${redirectionPage}`} />}
+        path="/"
+        element={<Navigate replace={true} to={`${redirectionPage}`} />}
       />
     </Routes>
   );
