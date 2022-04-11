@@ -7,10 +7,8 @@ const HandlePage: React.VFC = () => {
 
   const getUrlParameter = useCallback(
     (name: string) => {
-      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
       var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
 
-      console.log("getUrlParameter", location, location.search);
       var results = regex.exec(location.search);
       return results === null
         ? ""
@@ -25,9 +23,10 @@ const HandlePage: React.VFC = () => {
       localStorage.setItem("accessToken", token);
       setRedirectionPage("/");
     } else {
-      setRedirectionPage("/auth/login");
+      // TODO: return 전에 반영시켜야함....
+      setRedirectionPage(() => "/auth/login");
     }
-  }, [getUrlParameter, redirectionPage]);
+  }, [getUrlParameter]);
 
   return (
     <Routes>
