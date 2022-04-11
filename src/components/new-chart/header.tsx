@@ -7,9 +7,8 @@ import {
   SelectChangeEvent,
   Stack,
   TextField,
-  Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 
 type ChartCategory = "Select" | "Topology" | "Trace";
@@ -26,6 +25,7 @@ const isChartCategory = (value: string): value is ChartCategory => {
 };
 
 const Header: React.VFC = () => {
+  const titleInputRef = useRef();
   const [chartCategory, setChartCategory] = useState<ChartCategory>("Select");
 
   const handleChartCategoryChange = (event: SelectChangeEvent) => {
@@ -43,10 +43,9 @@ const Header: React.VFC = () => {
       sx={{
         display: "flex",
         flexWrap: "wrap",
-        height: "3rem",
-        width: "auto",
         bgcolor: "#8bc34a",
         justifyContent: "space-between",
+        py: 1,
       }}
       component="form"
     >
@@ -57,6 +56,7 @@ const Header: React.VFC = () => {
           label="chart name"
           variant="standard"
           size="small"
+          inputRef={titleInputRef}
         />
         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="chartCategory">Category</InputLabel>

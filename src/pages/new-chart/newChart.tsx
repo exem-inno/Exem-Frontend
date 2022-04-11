@@ -1,27 +1,38 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
-import Header from "../../components/new-chart/header";
+import Footer from "../../components/new-chart/Footer";
+import Header from "../../components/new-chart/Header";
+import Preview from "../../components/new-chart/Preview";
 
-// TODO: choose a type - Page or Modal
-const NewChartPage: React.VFC = () => {
-  const onSubmit = (value: FormDataEntryValue) => {
+interface Props {
+  onClose: () => void;
+}
+
+const NewChartModal: React.VFC<Props> = ({ onClose }) => {
+  const onSubmit = () => {
     console.log("handleSubmit");
-    console.log(value);
+    // TODO: call POST new chart API
+
+    onClose();
   };
 
   const onCancel = () => {
-    // TODO: call onClose props
     console.log("handleCancel");
+    onClose();
   };
 
   return (
     <Container maxWidth="xl">
-      <Box sx={{ bgcolor: "#cfe8fc", height: "100vh" }}>
+      <Box sx={{ bgcolor: "#cfe8fc", px: "1rem" }}>
         {/* header */}
-        <Header onCancel={onCancel} onSubmit={onSubmit} />
+        <Header />
+        {/* chart preview */}
+        <Preview />
+        {/* footer */}
+        <Footer onCancel={onCancel} onSubmit={onSubmit} />
       </Box>
     </Container>
   );
 };
 
-export default NewChartPage;
+export default NewChartModal;
