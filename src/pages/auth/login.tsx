@@ -7,7 +7,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-const url = "http://localhost:8080";
+// back-end path
+const url = "http://ec2-13-209-251-220.ap-northeast-2.compute.amazonaws.com:8080";
 const redirectionURL = "http://localhost:3000/auth/handle";
 const loginURL =
   url + "/oauth2/authorize/google?redirect_uri=" + redirectionURL;

@@ -21,18 +21,13 @@ const HandlePage: React.VFC = () => {
 
   useEffect(() => {
     const token = getUrlParameter("token");
-
-    console.log("token", token);
-
     if (token) {
-      console.log("성공");
       localStorage.setItem("accessToken", token);
       setRedirectionPage("/");
     } else {
-      console.log("실패");
       setRedirectionPage("/auth/login");
     }
-  }, [getUrlParameter]);
+  }, [getUrlParameter, redirectionPage]);
 
   return (
     <Routes>
