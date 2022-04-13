@@ -1,6 +1,5 @@
 import { Box, Modal } from "@mui/material";
 import React from "react";
-import NewChartModal from "../../pages/new-chart/newChart";
 
 const modalStyle = {
   position: "absolute" as "absolute",
@@ -17,7 +16,7 @@ interface Props {
   open: boolean;
   onClose: () => void;
 }
-const CustomModal: React.VFC<Props> = ({open, onClose}) => {
+const CustomModal: React.FC<Props> = ({open, onClose, children}) => {
   return (
     <Modal
       open={open}
@@ -26,7 +25,7 @@ const CustomModal: React.VFC<Props> = ({open, onClose}) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <NewChartModal onClose={onClose} />
+        {children}
       </Box>
     </Modal>
   );

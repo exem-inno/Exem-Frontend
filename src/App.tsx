@@ -4,6 +4,7 @@ import { Box } from "@mui/system";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/auth/login";
 import CustomModal from "./components/modal/CustomModal";
+import NewChartModal from "./pages/new-chart/newChart";
 
 const MainPage: React.VFC = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -14,7 +15,9 @@ const MainPage: React.VFC = () => {
   return (
     <Box>
       <Button onClick={handleOpen}>open modal</Button>
-      <CustomModal open={open} onClose={handleClose} />
+      <CustomModal open={open} onClose={handleClose}>
+        <NewChartModal onClose={handleClose}/>
+      </CustomModal>
     </Box>
   );
 };
