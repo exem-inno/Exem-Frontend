@@ -4,30 +4,40 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import Toolbar from "@mui/material/Toolbar";
 import _ from "lodash";
 import "./dashboard.css";
+import Graph from "components/charts/Graph";
+import graph from "datas/graph.json";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 function generateLayout() {
-  return _.map(_.range(0, 10), function (item, i) {
-    var y = Math.ceil(Math.random() * 4) + 1;
+  return _.map(_.range(0, 1), function (item, i) {
+    // var y = Math.ceil(Math.random() * 4) + 1;
     return {
-      x: (_.random(0, 5) * 2) % 12,
-      y: Math.floor(i / 6) * y,
-      w: 2,
-      h: y,
+      x: 0,
+      y: 0,
+      w: 12,
+      h: 10,
       i: i.toString(),
     };
   });
 }
 
 const Dashboard: VFC = () => {
-  const [layouts, setLayouts] = useState({ lg: generateLayout() });
+  const [layouts] = useState({ lg: generateLayout() });
+  const options = {
+    nodes: {
+      shape: "dot",
+    },
+    edges: {
+      arrows: "to",
+    },
+  };
 
   const generateDOM = () => {
     return _.map(layouts.lg, function (l, i) {
       return (
         <div key={i}>
-          <span className="text">{i}</span>
+          <Graph title="Service Graph" data={graph} options={options} />
         </div>
       );
     });
