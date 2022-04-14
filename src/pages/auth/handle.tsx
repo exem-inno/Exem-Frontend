@@ -9,10 +9,19 @@ const HandlePage: React.VFC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(url + "/user/me")
+    fetch(url + "/user/me", { redirect: "follow" })
       .then((res) => {
         if (!res.ok) {
-          return Promise.reject(res);
+          throw new Error("Response Error");
+        }
+        if (res.redirected) {
+          console.log("redirection path", res.url);
+          const url = res.url;
+          const searchValue = "localhost:3000";
+          const indexOfFirst = url.indexOf(searchValue);
+          const endPoint = url.slice(indexOfFirst + searchValue.length);
+          console.log("result", url, indexOfFirst, endPoint);
+          navigate(endPoint);
         }
         return res.json();
       })
@@ -22,11 +31,15 @@ const HandlePage: React.VFC = () => {
       })
       .catch((err) => {
         console.log("/user/me Error", err);
-        // navigate("/auth/login");
+        navigate("/auth/login");
       });
   }, [navigate]);
 
-  return <p>로그인 시도 중 잠시만 기다리시오...</p>;
+  return (
+    <div>
+      <h1>로그인 처리 중 잠시만 기다리시오...</h1>
+    </div>
+  );
 };
 
 export default HandlePage;
