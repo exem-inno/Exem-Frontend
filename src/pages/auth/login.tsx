@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // back-end path
 const url =
   "http://ec2-13-209-251-220.ap-northeast-2.compute.amazonaws.com:8080";
-const redirectionURL = "http://localhost:3000/auth/handle";
+const redirectionURL = "http://localhost:3000/";
 const loginURL =
   url + "/oauth2/authorize/google?redirect_uri=" + redirectionURL;
 
