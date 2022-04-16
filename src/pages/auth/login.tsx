@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -7,12 +7,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
-const LoginPage: React.VFC = () => {
-  const handleSubmit = useCallback((event: React.FormEvent): void => {
-    event.preventDefault();
-    console.log("Clicked Sign In Button");
-  }, []);
+// back-end path
+const url =
+  // "http://ec2-13-209-251-220.ap-northeast-2.compute.amazonaws.com:8080";
+  "http://localhost:8080"
+const redirectionURL = "http://localhost:3000/";
+const loginURL =
+  url + "/oauth2/authorize/google?redirect_uri=" + redirectionURL;
 
+const LoginPage: React.VFC = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -30,12 +33,13 @@ const LoginPage: React.VFC = () => {
         <Typography component="h1" variant="h5">
           Log In
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" noValidate sx={{ mt: 1 }}>
           <Button
-            type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            // login
+            href={loginURL}
           >
             Log In with Google
           </Button>
