@@ -1,7 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState, useEffect, useRef, VFC } from "react";
 import { IGraphData } from "types/graph";
 import { DataSet, Network } from "vis-network/standalone";
+import Chart from "./Chart";
 
 interface Props {
   title: string;
@@ -31,13 +32,7 @@ const Graph: VFC<Props> = ({ title, data, options }) => {
   }, [edges, nodes, options]);
 
   return (
-    <>
-      <Typography
-        sx={{ position: "absolute", top: "10px", left: "20px" }}
-        variant="subtitle1"
-      >
-        {title}
-      </Typography>
+    <Chart title={title}>
       <Box
         sx={{
           height: "100%",
@@ -46,7 +41,7 @@ const Graph: VFC<Props> = ({ title, data, options }) => {
         }}
         ref={visJsRef}
       ></Box>
-    </>
+    </Chart>
   );
 };
 
