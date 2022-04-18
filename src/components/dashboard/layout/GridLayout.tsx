@@ -1,24 +1,15 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import _ from "lodash";
+import { ILayout } from "types/layout";
 import "./gridlayout.css";
-import generateLayout from "utils/dashboard/generateLayout";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const GridLayout: FC = ({ children }) => {
-  const [layouts] = useState({ lg: generateLayout(1) });
+interface Props {
+  layouts: { lg: ILayout[] };
+}
 
-  const generateDOM = () => {
-    return _.map(layouts.lg, function (l, i) {
-      return (
-        <div key={i}>
-          <span className="text">{children}</span>
-        </div>
-      );
-    });
-  };
-
+const GridLayout: FC<Props> = ({ layouts, children }) => {
   return (
     <ResponsiveGridLayout
       className="layout"
@@ -28,7 +19,7 @@ const GridLayout: FC = ({ children }) => {
       rowHeight={30}
       width={1200}
     >
-      {generateDOM()}
+      {children}
     </ResponsiveGridLayout>
   );
 };

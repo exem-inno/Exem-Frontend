@@ -3,7 +3,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import AppBar from "components/dashboard/layout/AppBar";
 import Drawer from "components/dashboard/layout/Drawer";
-import GridLayout from "components/dashboard/layout/GridLayout";
 import { FC, useState, useCallback } from "react";
 
 export const drawerWidth: number = 180;
@@ -32,7 +31,7 @@ const DashboardLayout: FC = ({ children }) => {
         }}
       >
         <Toolbar />
-        <GridLayout>{children}</GridLayout>
+        {children}
       </Box>
     </Box>
   );
