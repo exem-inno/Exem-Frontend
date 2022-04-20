@@ -78,7 +78,9 @@ const StickyHeadTable: VFC<Props> = ({
                         if (column.id === "service") {
                           return (
                             <TableCell key={column.id} align={column.align}>
-                              <Link to={`/service/${value}`}>{value}</Link>
+                              <Link to={`/dashboard/service/${value}`}>
+                                {value}
+                              </Link>
                             </TableCell>
                           );
                         }
