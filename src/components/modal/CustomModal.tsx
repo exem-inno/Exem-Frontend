@@ -9,14 +9,14 @@ const modalStyle = {
   width: 400,
   bgcolor: "background.paper",
   boxShadow: 24,
-  p: 2,
 };
 
 interface Props {
   open: boolean;
   onClose: () => void;
 }
-const CustomModal: React.FC<Props> = ({open, onClose, children}) => {
+
+const CustomModal: React.FC<Props> = ({ open, onClose, children }) => {
   return (
     <Modal
       open={open}
@@ -24,9 +24,7 @@ const CustomModal: React.FC<Props> = ({open, onClose, children}) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={modalStyle}>
-        {children}
-      </Box>
+      <Box sx={modalStyle}>{children}</Box>
     </Modal>
   );
 };

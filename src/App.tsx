@@ -1,33 +1,28 @@
-import React, { useState } from "react";
-import { Button } from "@mui/material";
-import { Box } from "@mui/system";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/auth/login";
-import CustomModal from "./components/modal/CustomModal";
-import NewChartModal from "./pages/new-chart/newChart";
-
-const MainPage: React.VFC = () => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  return (
-    <Box>
-      <Button onClick={handleOpen}>open modal</Button>
-      <CustomModal open={open} onClose={handleClose}>
-        <NewChartModal onClose={handleClose}/>
-      </CustomModal>
-    </Box>
-  );
-};
+import ServicePage from "./pages/services";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/auth/login" element={<LoginPage />} />
-      <Route path="/" element={<MainPage />} />
-    </Routes>
+    <div>
+      <div>
+        <a href="/services/1">1번 서비스로 이동</a>
+      </div>
+      <div>
+        <a href="/services/2">2번 서비스로 이동</a>
+      </div>
+      <div>
+        <a href="/services/3">3번 서비스로 이동</a>
+      </div>
+      <div>
+        <a href="/services/4">4번 서비스로 이동</a>
+      </div>
+      <Routes>
+        <Route path="/auth/login" element={<LoginPage />} />
+        {/* <Route path="/" element={<MainPage />} /> */}
+        <Route path="/services/:serviceId/*" element={<ServicePage />} />
+      </Routes>
+    </div>
   );
 }
 
