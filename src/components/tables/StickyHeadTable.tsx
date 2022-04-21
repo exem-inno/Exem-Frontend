@@ -8,6 +8,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { ChangeEvent, VFC, useCallback } from "react";
 import Table from "./Table";
+import { Link } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -64,11 +65,23 @@ const StickyHeadTable: VFC<Props> = ({
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map((row, ind) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.key}>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.key || ind}
+                    >
                       {columns.map((column) => {
                         const value = row[column.id];
+                        if (column.id === "service") {
+                          return (
+                            <TableCell key={column.id} align={column.align}>
+                              <Link to={`/service/${value}`}>{value}</Link>
+                            </TableCell>
+                          );
+                        }
                         return (
                           <TableCell key={column.id} align={column.align}>
                             {column.format && typeof value === "number"
