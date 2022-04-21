@@ -2,12 +2,11 @@ import _ from "lodash";
 
 const generateLayout = (n: number) => {
   return _.map(_.range(0, n), function (item, i) {
-    var y = Math.ceil(Math.random() * 4) + 1;
     return {
-      x: (_.random(0, 5) * 2) % 12,
-      y: Math.floor(i / 6) * y,
-      w: 2,
-      h: y,
+      x: 0,
+      y: 0,
+      w: 12,
+      h: 10,
       i: i.toString(),
     };
   });
