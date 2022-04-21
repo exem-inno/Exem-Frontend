@@ -6,21 +6,21 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { ChangeEvent, VFC, useCallback } from "react";
+import { ChangeEvent, FC, useCallback } from "react";
 import Table from "./Table";
-import { Link } from "react-router-dom";
+import { Rows, Columns } from "types/table";
 
 interface Props {
   title: string;
-  rows: any[];
-  columns: any[];
+  rows: Rows;
+  columns: Columns;
   page: number;
   setPage: (v: number) => void;
   rowsPerPage: number;
   setRowsPerPage: (v: number) => void;
 }
 
-const StickyHeadTable: VFC<Props> = ({
+const StickyHeadTable: FC<Props> = ({
   title,
   rows,
   columns,
@@ -28,6 +28,7 @@ const StickyHeadTable: VFC<Props> = ({
   setPage,
   rowsPerPage,
   setRowsPerPage,
+  children,
 }) => {
   const handleChangePage = useCallback(
     (event: unknown, newPage: number) => {
@@ -54,7 +55,6 @@ const StickyHeadTable: VFC<Props> = ({
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
-                    align={column.align}
                     style={{ minWidth: column.minWidth }}
                   >
                     {column.label}
@@ -62,38 +62,7 @@ const StickyHeadTable: VFC<Props> = ({
                 ))}
               </TableRow>
             </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, ind) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.key || ind}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        if (column.id === "service") {
-                          return (
-                            <TableCell key={column.id} align={column.align}>
-                              <Link to={`/service/${value}`}>{value}</Link>
-                            </TableCell>
-                          );
-                        }
-                        return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody>
+            <TableBody>{children}</TableBody>
           </MUITable>
         </TableContainer>
         <TablePagination

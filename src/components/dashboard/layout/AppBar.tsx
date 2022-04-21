@@ -41,7 +41,7 @@ const AppBar: VFC<Props> = ({ open, toggleDrawer }) => {
   const [title, setTitle] = useState(slug["*"]);
 
   useEffect(() => {
-    setTitle(slug["*"]);
+    setTitle(slug["*"]?.split("/").join(" / "));
   }, [slug]);
 
   return (
