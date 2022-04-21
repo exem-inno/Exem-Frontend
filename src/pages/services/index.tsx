@@ -5,6 +5,14 @@ import { useParams } from "react-router-dom";
 import CustomModal from "../../components/modal/CustomModal";
 import CustomChart from "../../components/new-chart/CustomChart";
 import NewChartModal from "../new-chart/newChart";
+import { Responsive } from "react-grid-layout";
+import "./styles.css";
+
+const layout = [
+  { i: "a", x: 0, y: 0, w: 1, h: 100 },
+  { i: "b", x: 1, y: 0, w: 1, h: 100 },
+  { i: "c", x: 2, y: 0, w: 1, h: 100 },
+];
 
 const FIREBASE_DOMAIN = "https://react-26863-default-rtdb.firebaseio.com";
 
@@ -15,7 +23,7 @@ interface Data {
 type Charts = Data[];
 
 // TODO: rerender this Component when closed Modal or added new chart
-const ServicePage = () => {
+const ServicePage: React.VFC = () => {
   const params = useParams();
   const { serviceId } = params;
 
@@ -74,18 +82,28 @@ const ServicePage = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{ width: 1, height: "100%" }}>
       {serviceIsLoading || chartIsLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           <h1>service Name {service.title}</h1>
-          {chart?.map((item) => (
-            <div key={item.id}>
-              {/* {item.type} */}
-              <CustomChart chartCategory={item.type} />
-            </div>
-          ))}
+          <Responsive
+            className="layout"
+            layouts={{ lg: layout }}
+            breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+            cols={{ lg: 3, md: 3, sm: 3, xs: 3, xxs: 3 }}
+            rowHeight={30} // 격자 높이
+            width={1200}
+            compactType="horizontal"
+            autoSize={true}
+          >
+            {chart?.map((item) => (
+              <div key={item.id}>
+                <CustomChart chartCategory={item.type} />
+              </div>
+            ))}
+          </Responsive>
           <Button onClick={handleOpen}>open modal</Button>
           <CustomModal open={open} onClose={handleClose}>
             <NewChartModal
