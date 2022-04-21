@@ -11,7 +11,7 @@ const DashboardPage: VFC = () => {
       <Routes>
         <Route path="/cluster" element={<ClusterPage />} />
         <Route path="/http" element={<HTTPPage />} />
-      <Route path="/services/:serviceId/*" element={<ServicePage />} />
+        <Route path="/services/:serviceId/*" element={<ServicePage />} />
       </Routes>
     </DashboardLayout>
   );

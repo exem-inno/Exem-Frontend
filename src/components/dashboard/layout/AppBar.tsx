@@ -1,4 +1,5 @@
-import { VFC } from "react";
+import { useEffect, useState, VFC } from "react";
+import { useParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -36,6 +37,13 @@ interface Props {
 }
 
 const AppBar: VFC<Props> = ({ open, toggleDrawer }) => {
+  const slug = useParams();
+  const [title, setTitle] = useState(slug["*"]);
+
+  useEffect(() => {
+    setTitle(slug["*"]);
+  }, [slug]);
+
   return (
     <StyledAppBar position="absolute" open={open}>
       <Toolbar sx={{ pr: "24px" }}>
@@ -58,7 +66,7 @@ const AppBar: VFC<Props> = ({ open, toggleDrawer }) => {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          Dashboard / {title}
         </Typography>
         <IconButton color="inherit">
           <AccountCircleSharpIcon />
