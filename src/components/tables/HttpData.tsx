@@ -25,7 +25,6 @@ const HttpData: VFC<Props> = ({ onClickRow }) => {
     { id: "service", label: "SVC" },
     { id: "pod", label: "POD" },
   ];
-
   return (
     <StickyHeadTable
       title="HTTP Data"
