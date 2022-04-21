@@ -3,11 +3,7 @@ import { VFC } from "react";
 import Chart from "./Chart";
 import ReactECharts from "echarts-for-react";
 
-interface Props {
-  title: string;
-}
-
-const Span: VFC<Props> = ({ title }) => {
+const SpanChart: VFC = () => {
   const option = {
     title: {
       // text: "Waterfall Chart",
@@ -69,7 +65,7 @@ const Span: VFC<Props> = ({ title }) => {
   };
 
   return (
-    <Chart title={title}>
+    <Chart title="Span Data">
       <Box
         sx={{
           height: "100%",
@@ -83,4 +79,4 @@ const Span: VFC<Props> = ({ title }) => {
   );
 };
 
-export default Span;
+export default SpanChart;

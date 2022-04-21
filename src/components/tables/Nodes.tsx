@@ -1,10 +1,10 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { useState } from "react";
+import { useState, VFC } from "react";
 import { INodeColumn, INodeRow } from "types/table";
 import StickyHeadTable from "./StickyHeadTable";
 
-export default function NodesTable() {
+const NodesTable: VFC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const columns: INodeColumn[] = [
@@ -47,4 +47,6 @@ export default function NodesTable() {
         })}
     </StickyHeadTable>
   );
-}
+};
+
+export default NodesTable;

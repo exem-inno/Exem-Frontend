@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import { IHttpColumn, IHttpRow } from "types/table";
 
 interface Props {
-  onClickRow: (event: any, ind: number) => void;
+  onClickRow: ((event: any, ind: number) => void) | undefined;
 }
 
-const HttpData: VFC<Props> = ({ onClickRow }) => {
+const HttpDataTable: VFC<Props> = ({ onClickRow }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -45,7 +45,7 @@ const HttpData: VFC<Props> = ({ onClickRow }) => {
               role="button"
               tabIndex={-1}
               key={ind}
-              onClick={(e) => onClickRow(e, ind)}
+              onClick={onClickRow ? (e) => onClickRow(e, ind) : undefined}
             >
               {columns.map((column: IHttpColumn) => {
                 const value = row[column.id];
@@ -65,4 +65,4 @@ const HttpData: VFC<Props> = ({ onClickRow }) => {
   );
 };
 
-export default HttpData;
+export default HttpDataTable;

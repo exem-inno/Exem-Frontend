@@ -1,10 +1,10 @@
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { useState } from "react";
+import { useState, VFC } from "react";
 import { INamespaceColumn, INamespaceRow } from "types/table";
 import StickyHeadTable from "./StickyHeadTable";
 
-export default function NamespacesTable() {
+const NamespacesTable: VFC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const columns: INamespaceColumn[] = [
@@ -38,4 +38,6 @@ export default function NamespacesTable() {
         })}
     </StickyHeadTable>
   );
-}
+};
+
+export default NamespacesTable;
