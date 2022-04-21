@@ -1,80 +1,79 @@
 import GridLayout from "components/dashboard/layout/GridLayout";
-import HttpData from "components/tables/HttpData";
 import _ from "lodash";
 import { useCallback, useEffect, useState, VFC } from "react";
 import { ILayout } from "types/layout";
 import rows from "datas/httpdata.json";
-import Span from "components/charts/Span";
+import GridItem from "components/dashboard/layout/GridItem";
 
 const HTTPPage: VFC = () => {
-  const [selectedRow, setSelectedRow] = useState<number | null>(null);
+  const [selectedRow, setSelectedRow] = useState<number | null>(0);
+  const [height, setHeight] = useState(12);
   const [layouts, setLayouts] = useState<{ lg: ILayout[] }>({
     lg: [
       {
-        i: "0",
+        i: "http-data-table",
         x: 0,
         y: 0,
         w: 12,
-        h:
-          4 + 3 * Math.floor((rows.length - 1) / 2) + (rows.length % 2 ? 2 : 3),
+        h: height,
       },
     ],
   });
 
   const onClickRow = useCallback(
     (event, ind) => {
-      if (ind === selectedRow) {
-        setSelectedRow(null);
-        setLayouts({
+      console.log(layouts);
+      if (selectedRow === null) {
+        setSelectedRow(ind);
+        setLayouts((prev) => ({
           lg: [
-            {
-              i: "0",
-              x: 0,
-              y: 0,
-              w: 12,
-              h:
-                4 +
-                3 * Math.floor((rows.length - 1) / 2) +
-                (rows.length % 2 ? 2 : 3),
-            },
+            ...prev.lg.filter((v) => v.i === "http-data-table"),
+            { i: "span-chart", x: 0, y: 0, w: 12, h: 9 },
           ],
-        });
+        }));
+      } else if (ind === selectedRow) {
+        setSelectedRow(null);
+        setLayouts((prev) => ({
+          lg: [...prev.lg.filter((v) => v.i === "http-data-table")],
+        }));
       } else {
         setSelectedRow(ind);
-        setLayouts({
+        setLayouts((prev) => ({
           lg: [
-            {
-              i: "0",
-              x: 0,
-              y: 0,
-              w: 12,
-              h:
-                4 +
-                3 * Math.floor((rows.length - 1) / 2) +
-                (rows.length % 2 ? 2 : 3),
-            },
-            { i: "1", x: 0, y: 0, w: 12, h: 9 },
+            ...prev.lg.filter((v) => v.i === "http-data-table"),
+            { i: "span-chart", x: 0, y: 0, w: 12, h: 9 },
           ],
-        });
+        }));
       }
     },
-    [selectedRow]
+    [layouts, selectedRow]
   );
 
   useEffect(() => {
-    const height =
-      4 + 3 * Math.floor((rows.length - 1) / 2) + (rows.length % 2 ? 2 : 3);
-    setLayouts({
-      lg: [{ i: "0", x: 0, y: 0, w: 12, h: height }],
-    });
+    setHeight(
+      4 + 3 * Math.floor((rows.length - 1) / 2) + (rows.length % 2 ? 2 : 3)
+    );
   }, []);
 
+  useEffect(() => {
+    setLayouts({
+      lg: [
+        {
+          i: "http-data-table",
+          x: 0,
+          y: 0,
+          w: 12,
+          h: height,
+        },
+      ],
+    });
+  }, [height]);
+
   const generateDOM = () => {
-    return _.map(layouts.lg, function (l, i) {
+    return _.map(layouts.lg, function (l) {
       return (
-        <div key={i} style={{ overflow: "scroll" }}>
-          {i === 0 && <HttpData onClickRow={onClickRow} />}
-          {i === 1 && <Span title="Span Data" />}
+        <div key={l.i} style={{ overflow: "scroll" }}>
+          <GridItem type={l.i} onClickRow={onClickRow} />
         </div>
       );
     });
