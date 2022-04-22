@@ -38,11 +38,14 @@ const ServicePage: React.VFC = () => {
       }
     })
   );
+
+  const [chartData, setChartData] = useState<number>(0);
+
   const {
     data: chart,
     error: chartError,
     isLoading: chartIsLoading,
-  }: UseQueryResult<Charts, string> = useQuery(["service", serviceId], () =>
+  }: UseQueryResult<Charts, string> = useQuery(["chart", chartData], () =>
     fetch(`${FIREBASE_DOMAIN}/chart/${serviceId}.json`)
       .then((res) => {
         if (res.ok) {
@@ -75,7 +78,10 @@ const ServicePage: React.VFC = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setChartData((prev) => prev + 1);
+  };
 
   if (chartError || serviceFetchError) {
     return <a href="/">error... main page 로 돌아갑시다..</a>;
