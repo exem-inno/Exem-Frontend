@@ -1,18 +1,17 @@
 import { Box } from "@mui/material";
-import { useState, useEffect, useRef, VFC } from "react";
-import { IGraphData } from "types/graph";
-import { DataSet, Network } from "vis-network/standalone";
+import { useEffect, useRef, VFC } from "react";
+import { IEdge, INode } from "types/graph";
+import { Network } from "vis-network/standalone";
 import Chart from "./Chart";
 
 interface Props {
   title: string;
-  data: IGraphData;
+  nodes: INode[];
+  edges: IEdge[];
   options: any;
 }
 
-const Graph: VFC<Props> = ({ title, data, options }) => {
-  const [nodes] = useState(new DataSet(data.nodes));
-  const [edges] = useState(new DataSet(data.edges));
+const Graph: VFC<Props> = ({ title, nodes, edges, options }) => {
   const visJsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
