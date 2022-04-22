@@ -1,0 +1,14 @@
+{
+  "yAxisData": [
+    "tpcc-payment-6b58bbb7bb-l2c7z",
+    "tpcc-payment-6b58bbb7bb-l2c7z",
+    "tpcc-payment-6b58bbb7bb-l2c7z",
+    "tpcc-payment-6b58bbb7bb-l2c7z",
+    "tpcc-payment-6b58bbb7bb-l2c7z",
+    "tpcc-main-6b8b9cd86c-m9k22",
+    "tpcc-main-6b8b9cd86c-m9k22"
+  ],
+  "startTime": [906000, 910000, 909000, 908000, 905000, 904000, 904000],
+  "duration": [2757, 296, 193, 906, 5186, 6730, 6893],
+  "endTime": [908757, 910296, 909193, 908906, 910186, 910730, 910893]
+}

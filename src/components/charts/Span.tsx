@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import { VFC } from "react";
 import Chart from "./Chart";
 import ReactECharts from "echarts-for-react";
+import data from "datas/span.json";
 
 const SpanChart: VFC = () => {
   const option = {
@@ -28,11 +29,12 @@ const SpanChart: VFC = () => {
     yAxis: {
       type: "category",
       splitLine: { show: false },
-      data: ["tpcc-payment", "tpcc-payment", "tpcc-payment", "tpcc-main"],
+      data: data.yAxisData,
     },
     xAxis: {
       type: "value",
-      min: Math.min(908000, 904000),
+      min: Math.min(...data.startTime),
+      max: Math.max(...data.endTime),
     },
     series: [
       {
@@ -49,7 +51,7 @@ const SpanChart: VFC = () => {
             color: "transparent",
           },
         },
-        data: [910000, 909000, 908000, 904000],
+        data: data.startTime,
       },
       {
         name: "duration",
@@ -59,7 +61,7 @@ const SpanChart: VFC = () => {
           show: false,
           position: "inside",
         },
-        data: [296, 193, 906, 6730],
+        data: data.duration,
       },
     ],
   };
