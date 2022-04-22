@@ -3,6 +3,7 @@ import { useEffect, useState, VFC } from "react";
 import { useQuery } from "react-query";
 import { fetchJson } from "lib/api";
 import { IEdge, INode } from "types/graph";
+import Typography from "@mui/material/Typography";
 
 const ServicesGraph: VFC = () => {
   const [nodes, setNodes] = useState<INode[]>([]);
@@ -60,7 +61,17 @@ const ServicesGraph: VFC = () => {
           options={options}
         />
       ) : (
-        <div>Loading...</div>
+        <Typography
+          sx={{
+            position: "absolute",
+            top: "10px",
+            left: "20px",
+            fontWeight: 600,
+          }}
+          variant="subtitle1"
+        >
+          Loading...
+        </Typography>
       )}
     </>
   );
