@@ -1,13 +1,13 @@
 export interface INode {
-  id: number;
+  id: string;
   label: string;
   size?: number;
 }
 
 export interface IEdge {
   id: number;
-  from: number;
-  to: number;
+  from: string;
+  to: string;
 }
 
 export interface IGraphData {
