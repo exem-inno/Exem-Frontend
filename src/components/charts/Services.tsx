@@ -17,7 +17,7 @@ const ServicesGraph: VFC = () => {
     },
   };
 
-  const { data } = useQuery("service-graph-data", async () => {
+  const { data, isLoading } = useQuery("service-graph-data", async () => {
     try {
       return await fetchJson("/api/fromTo");
     } catch (err) {
@@ -53,14 +53,7 @@ const ServicesGraph: VFC = () => {
   }, [data]);
   return (
     <>
-      {data ? (
-        <Graph
-          title="Service Graph"
-          nodes={nodes}
-          edges={edges}
-          options={options}
-        />
-      ) : (
+      {isLoading ? (
         <Typography
           sx={{
             position: "absolute",
@@ -72,6 +65,13 @@ const ServicesGraph: VFC = () => {
         >
           Loading...
         </Typography>
+      ) : (
+        <Graph
+          title="Service Graph"
+          nodes={nodes}
+          edges={edges}
+          options={options}
+        />
       )}
     </>
   );
